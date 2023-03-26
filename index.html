@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.skill
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 100px;
+    background-color: rgb(230, 210, 178);
+}
+
+.skill h2 
+{
+    font-size: 40px;
+    text-transform: capitalize;
+}
+
+.box-cont
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px;
+    margin-top: 30px;
+    background-color: rgb(203, 252, 104);
+    border-radius: 50px;
+}
+
+.box
+{
+    position: relative;
+    cursor: pointer;
+}
+
+.box .text
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: rgb(2, 23, 33);
+}
+
+.box .text h2
+{
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.box .text h3 
+{
+    font-size: 18px;
+    display: block;
+    color: rgb(26, 24, 24);
+}
+
+.circle
+{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle .points
+{
+    width: 3px;
+    height: 15px;
+    background: rgb(185, 209, 138);
+    position: absolute;
+    border-radius: 3px;
+    transform: rotate(calc(var(--i)*var(--rot))) translateY(-100px);
+}
+
+.points.marked
+{
+    animation: glow 0.04s linear forwards;
+    animation-delay: calc(var(--i)*0.05s);
+}
+
+@keyframes glow 
+{
+    0%{background: rgb(185, 209, 138);box-shadow: none;}
+    100%{background: var(--bgColor);box-shadow: 0 0 10px var(--bgColor);}
+}
+
+</style>
+</head>
+<body>
+    <!-- skills section here  -->
+<div class="skill" id="skill">
+
+    <h2>my skills</h2>    
+     
+    <div class="box-cont">    
+    
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="90" style="--bgColor:dodgerblue"></div>
+    <div class="text">
+    <h2>90%</h2>
+    <h3>HTML</h3>    
+    </div>    
+    </div>
+    
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="70" style="--bgColor:brown"></div>
+    <div class="text">
+    <h2>80%</h2>
+    <h3>CSS</h3>    
+    </div>    
+    </div>
+        
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="60" style="--bgColor:olive"></div>
+    <div class="text">
+    <h2>50%</h2>
+    <h3>JavaScript</h3>    
+    </div>    
+    </div>
+    
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="90" style="--bgColor:red"></div>
+    <div class="text">
+    <h2>90%</h2>
+    <h3>FIGMA</h3>    
+    </div>    
+    </div>
+        
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="90" style="--bgColor:blue"></div>
+    <div class="text">
+    <h2>90%</h2>
+    <h3>CANVA</h3>    
+    </div>    
+    </div>
+            
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="60" style="--bgColor:indigo"></div>
+    <div class="text">
+    <h2>50%</h2>
+    <h3>WIX</h3>    
+    </div>    
+    </div>
+    
+    <div class="box">
+    <div class="circle" data-dots="70" data-percent="60" style="--bgColor:green"></div>
+    <div class="text">
+    <h2>50%</h2>
+    <h3>CAMTASIA</h3>    
+    </div>    
+    </div>
+    
+    </div>
+    
+    </div>
+
+<script>
+    const circles = document.querySelectorAll('.circle');
+circles.forEach(elem => {
+    var dots = elem.getAttribute('data-dots')
+    var marked = elem.getAttribute('data-percent');
+    var percent = Math.floor(dots * marked / 100);
+    var rotate = 360 / dots;
+    var points = "";
+    for (let i = 0; i < dots; i++) {
+        points += `<div class="points" style="--i: ${i}; --rot: ${rotate}deg"></div>`;
+    }
+    elem.innerHTML = points;
+    const pointsMarked = elem.querySelectorAll('.points');
+    for (let i = 0; i < percent; i ++){
+        pointsMarked[i].classList.add('marked')
+    }
+})
+</script>    
+</body>
+</html>
